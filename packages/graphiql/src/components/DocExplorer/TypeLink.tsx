@@ -5,18 +5,14 @@
  *  LICENSE file in the root directory of this source tree.
  */
 
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import { GraphQLList, GraphQLNonNull, GraphQLType } from 'graphql';
 import Maybe from 'graphql/tsutils/Maybe';
-
-type OnClickFunction = (
-  type: Maybe<GraphQLType>,
-  event: MouseEvent<HTMLAnchorElement>,
-) => void;
+import { OnClickTypeFunction } from './types';
 
 type TypeLinkProps = {
   type?: Maybe<GraphQLType>;
-  onClick: OnClickFunction;
+  onClick: OnClickTypeFunction;
 };
 
 export default class TypeLink extends React.Component<TypeLinkProps, {}> {
@@ -29,7 +25,7 @@ export default class TypeLink extends React.Component<TypeLinkProps, {}> {
   }
 }
 
-function renderType(type: Maybe<GraphQLType>, onClick: OnClickFunction) {
+function renderType(type: Maybe<GraphQLType>, onClick: OnClickTypeFunction) {
   if (type instanceof GraphQLNonNull) {
     return (
       <span>

@@ -5,7 +5,7 @@
  *  LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, MouseEvent } from 'react';
+import React, { ReactNode } from 'react';
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -20,13 +20,13 @@ import Argument from './Argument';
 import MarkdownContent from './MarkdownContent';
 import TypeLink from './TypeLink';
 import DefaultValue from './DefaultValue';
-import { FieldType } from './types';
+import { FieldType, OnClickTypeFunction, OnClickFieldFunction } from './types';
 
 type TypeDocProps = {
   schema: GraphQLSchema;
   type: GraphQLType;
-  onClickType: () => void;
-  onClickField: () => void;
+  onClickType: OnClickTypeFunction;
+  onClickField: OnClickFieldFunction;
 };
 
 type TypeDocState = {
@@ -193,12 +193,8 @@ export default class TypeDoc extends React.Component<
 type FieldProps = {
   type: GraphQLType;
   field: FieldType;
-  onClickType: () => void;
-  onClickField: (
-    field: FieldType,
-    type: GraphQLType,
-    event: MouseEvent<HTMLAnchorElement>,
-  ) => void;
+  onClickType: OnClickTypeFunction;
+  onClickField: OnClickFieldFunction;
 };
 
 function Field({ type, field, onClickType, onClickField }: FieldProps) {
